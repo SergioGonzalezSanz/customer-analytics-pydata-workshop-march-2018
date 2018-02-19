@@ -56,34 +56,43 @@ TO DO
 
 ### MacOS
 
+#### Requirements
+Please make sure you have [Homebrew](https://brew.sh/) installed on your
+machine. You can then install Python 3 with:
 
-#### Install python
-
-Before installing Spark and Zeppelin, you must have Python installed on your computer. If you have `brew` already on your system, just type:
-
-```
+```bash
 brew install python3
 ```
 
-If you want, you can add the Python installation directory to your path:
+If you want to add the Python installation directory to your path, follow the
+instructions [here](http://programwithus.com/learn-to-code/install-python3-mac/).
 
+You will also need to have XCode installed (you can download it from the App
+Store), along with the command line tools that you can install with:
 
-You can find the full instructions [here](http://programwithus.com/learn-to-code/install-python3-mac/).
+```bash
+xcode-select --install
+```
 
 #### Install Spark
 
 1. Go to your terminal
-1. Make sure you have the brew caskets up to date
-``
-1.
+1. Make sure you have the brew caskets up to date, then install `apache-spark`:
+   ```
+   brew update
+   brew upgrade
+   brew install apache-spark
+   ```
+1. Reload your terminal
 
 Once the installation is finished, you should be able to run the PySpark shell:
 
 ```
-pyspark-shell
+pyspark
 ```
 
-Please check which version of Python the shell is using. Take a look to the first line that appears after typing `pyspark-shell`:
+Please check which version of Python the shell is using. Take a look to the
+first line that appears after typing `pyspark`:
 
 ```
 Python 3.6.4 (default, Jan  6 2018, 11:51:15)
@@ -103,11 +112,13 @@ Welcome to
 
 Using Python version 3.6.4 (default, Jan  6 2018 11:51:15)
 SparkSession available as 'spark'.
+>>>
 ```
 
-If you are not using Python 3, please change it exporting the right python to the `PYSPARK_PYTHON` environment variable:
+If you are not using Python 3, please change it exporting the right python to
+the `PYSPARK_PYTHON` environment variable:
 
-```
+```bash
 export PYSPARK_PYTHON=python3
 ```
 
@@ -115,17 +126,35 @@ If you need a further explanation you can follow the instructions [here](https:/
 
 
 ### Install Zeppelin notebooks
+Zeppelin can be found on `brew`. Install it by typing:
 
-You can download the latest version of Zeppelin [here](https://zeppelin.apache.org/download.html). Once you have download and uncompress the file, go to the Zeppelin folder and type:
+```bash
+brew install apache-zeppelin
+```
+
+Alternatively, you can download the latest version of Zeppelin
+[here](https://zeppelin.apache.org/download.html).
+
+When Zeppelin is installed with `brew`, you can launch it from anywhere with the
+command:
+
+```bash
+zeppelin-daemon.sh start
+```
+
+To interrupt Zeppelin, type:
+
+```bash
+zeppelin-daemon.sh stop
+```
+
+If you downloaded the Zeppelin archive, uncompress it and jump into its
+folder. Then type:
 
 ```
 ./bin/zeppelin-daemon.sh start
 ```
 
-Once the daemon is running, you'll be able to access the notebook opening from your browser the address:
-
-```
-http://localhost:8080
-```
-It usually takes a few minutes to startup so don't rush it!
-
+Once the daemon is running, you'll be able to access the notebook opening from
+your browser the address `http://localhost:8080`. It usually takes a few minutes
+to startup, so don't rush it!
