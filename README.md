@@ -27,45 +27,51 @@ One of the most important tasks we must accomplish before doing any data analysi
 
 The dataset contains information about the client demographics and whether they hired the new product or not.
 
-1. Age (numeric)
-2. Job family (categorical: 'admin', 'blue­collar', 'entrepreneur', 'housemaid', 'management', 'retired', 'self­ employed', 'services', 'student', 'technician', 'unemployed', 'unknown')
-3. Marital status (categorical: 'divorced', 'married', 'single', 'unknown')
-4. Education level (categorical: 'basic.4y', 'basic.6y', 'basic.9y', 'high.school', 'illiterate', 'professional.course', 'university.degree', 'unknown')
-5. Has credit in areas? (categorical: 'no', 'yes', 'unknown')
-6. Average yearly balance in euro (numeric)
-7. Has a home loan? (binary: 'yes', 'no')
-8. Has a personal loan (binary: 'yes', 'no')
-9. Preferred communication channel (categorical: 'unknown', 'telephone', 'cellular')
-10. Day of the month of the last contact (numeric)
-11. Month of the last contact (categorical)
-12. Duration of the last contact in seconds (numeric)
-13. Number of times the customer has been contacted during the campaign, including this contact (numeric)
-14. Number of days since the previous contact (-1 if not previously contacted)
-15. Number of times the customer has been contacted during other campaigns (numeric)
-16. Campaign outcome: has the customer hired the deposit? (categorical: 'no', 'yes')
-
+1. **age:** age (numeric).
+2. **job:** job family (categorical: 'admin', 'blue­collar', 'entrepreneur', 'housemaid', 'management', 'retired', 'self­ employed', 'services', 'student', 'technician', 'unemployed', 'unknown').
+3. **marital:** marital status (categorical: 'divorced', 'married', 'single', 'unknown').
+4. **education:** education level (categorical: 'basic.4y', 'basic.6y', 'basic.9y', 'high.school', 'illiterate', 'professional.course', 'university.degree', 'unknown').
+5. **default:** has credit in areas? (categorical: 'no', 'yes', 'unknown').
+6. **housing:** has a home loan? (binary: 'yes', 'no').
+7. **loan:** has a personal loan (binary: 'yes', 'no').
+8. **contact:** preferred communication channel (categorical: 'unknown', 'telephone', 'cellular').
+9. **month:** last contact's month (categorical).
+10. **day_of_week:** last contact's week day (categorical).
+11. **duration:** duration of the last contact in seconds (numeric). This attribute shouldn't be used for classification since it's unknown before contacting the customers and directly correlated with the result of the call.
+12. **campaign:** number of times the customer has been contacted during the campaign, including this contact (numeric).
+13. **pdays:** number of days since the previous contact (-1 if not previously contacted).
+14. **previous:** number of times the customer has been contacted during previous campaigns (numeric).
+15. **poutcome:** previous marketing campaign result (categorical: 'failure', 'nonexistent', 'success').
+16. **emp.var.rate:** employment variation rate - quarterly indicator (numeric).
+17. **cons.price.idx:** consumer price index - monthly indicator (numeric).
+18. **cons.conf.idx:** consumer confidence index - monthly indicator (numeric).
+19. **euribor3m:** 3-month rate EURIBOR (numeric).
+20. **nr.employed:** number of employees - quarterly indicator (numeric).
+21. **y:** campaign outcome: has the customer hired the deposit? (categorical: 'no', 'yes').
 
 ## PySpark and Zeppelin Notebooks installation
 
 This section describes how to install PySpark and Zeppelin notebooks for Windows, MacOS and Linux. If you are already using them you can skip this section.
-
-
-### Windows
-
-TO DO
 
 ### MacOS
 
 
 #### Install python
 
-Before installing Spark and Zeppelin, you must have Python installed on your computer. If you have `brew` already on your system, just type:
+Before installing Spark and Zeppelin, you must have Python installed on your computer. Python 3.6 might cause some problems depending on the PySpark version you have on your machine, so we will use Python 3.5 on this workshop.
+
+If you have `brew` already on your system, just type:
 
 ```
-brew install python3
+brew install pyenv
+pyenv install 3.5.5
 ```
 
-If you want, you can add the Python installation directory to your path:
+It will install Python in `$HOME/.pyenv/versions/3.5.5`. Now, you must set the Python version you want to use with PySpark:
+
+```
+export PYSPARK_PYTHON=$HOME/.pyenv/versions/3.5.5/bin/python3.5
+```
 
 
 You can find the full instructions [here](http://programwithus.com/learn-to-code/install-python3-mac/).
@@ -74,8 +80,6 @@ You can find the full instructions [here](http://programwithus.com/learn-to-code
 
 1. Go to your terminal
 1. Make sure you have the brew caskets up to date
-``
-1.
 
 Once the installation is finished, you should be able to run the PySpark shell:
 
@@ -86,29 +90,25 @@ pyspark-shell
 Please check which version of Python the shell is using. Take a look to the first line that appears after typing `pyspark-shell`:
 
 ```
-Python 3.6.4 (default, Jan  6 2018, 11:51:15)
+Python 3.5.5 (...)
 [GCC 4.2.1 Compatible Apple LLVM 9.0.0 (clang-900.0.39.2)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
-Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+2018-03-04 19:24:04 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-18/02/18 22:16:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-18/02/18 22:16:36 WARN ObjectStore: Failed to get database global_temp, returning NoSuchObjectException
+2018-03-04 19:24:07 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+2018-03-04 19:24:07 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4041. Attempting port 4042.
+2018-03-04 19:24:07 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4042. Attempting port 4043.
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /__ / .__/\_,_/_/ /_/\_\   version 2.2.1
+   /__ / .__/\_,_/_/ /_/\_\   version 2.3.0
       /_/
 
-Using Python version 3.6.4 (default, Jan  6 2018 11:51:15)
+Using Python version 3.5.5 (default, Mar  4 2018 19:16:41)
 SparkSession available as 'spark'.
-```
-
-If you are not using Python 3, please change it exporting the right python to the `PYSPARK_PYTHON` environment variable:
-
-```
-export PYSPARK_PYTHON=python3
+>>>
 ```
 
 If you need a further explanation you can follow the instructions [here](https://medium.com/m/global-identity?redirectUrl=https://medium.freecodecamp.org/installing-scala-and-apache-spark-on-mac-os-837ae57d283f).
