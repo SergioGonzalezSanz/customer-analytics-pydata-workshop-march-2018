@@ -55,6 +55,14 @@ This section describes how to install PySpark and Zeppelin notebooks for Windows
 
 ### MacOS
 
+#### Requirements
+Please make sure you have [Homebrew](https://brew.sh/) installed on your
+machine. You will also need to have XCode installed (you can download it from the App
+Store), along with the command line tools that you can install with:
+
+```bash
+xcode-select --install
+```
 
 #### Install python
 
@@ -73,21 +81,25 @@ It will install Python in `$HOME/.pyenv/versions/3.5.5`. Now, you must set the P
 export PYSPARK_PYTHON=$HOME/.pyenv/versions/3.5.5/bin/python3.5
 ```
 
-
-You can find the full instructions [here](http://programwithus.com/learn-to-code/install-python3-mac/).
-
 #### Install Spark
 
 1. Go to your terminal
-1. Make sure you have the brew caskets up to date
+1. Make sure you have the brew caskets up to date, then install `apache-spark`:
+   ```
+   brew update
+   brew upgrade
+   brew install apache-spark
+   ```
+1. Reload your terminal
 
 Once the installation is finished, you should be able to run the PySpark shell:
 
 ```
-pyspark-shell
+pyspark
 ```
 
-Please check which version of Python the shell is using. Take a look to the first line that appears after typing `pyspark-shell`:
+Please check which version of Python the shell is using. Take a look to the
+first line that appears after typing `pyspark`:
 
 ```
 Python 3.5.5 (...)
@@ -115,17 +127,35 @@ If you need a further explanation you can follow the instructions [here](https:/
 
 
 ### Install Zeppelin notebooks
+Zeppelin can be found on `brew`. Install it by typing:
 
-You can download the latest version of Zeppelin [here](https://zeppelin.apache.org/download.html). Once you have download and uncompress the file, go to the Zeppelin folder and type:
+```bash
+brew install apache-zeppelin
+```
+
+Alternatively, you can download the latest version of Zeppelin
+[here](https://zeppelin.apache.org/download.html).
+
+When Zeppelin is installed with `brew`, you can launch it from anywhere with the
+command:
+
+```bash
+zeppelin-daemon.sh start
+```
+
+To interrupt Zeppelin, type:
+
+```bash
+zeppelin-daemon.sh stop
+```
+
+If you downloaded the Zeppelin archive, uncompress it and jump into its
+folder. Then type:
 
 ```
 ./bin/zeppelin-daemon.sh start
 ```
 
-Once the daemon is running, you'll be able to access the notebook opening from your browser the address:
-
-```
-http://localhost:8080
-```
-It usually takes a few minutes to startup so don't rush it!
-
+Once the daemon is running, you'll be able to access the notebook opening from
+your browser the address `http://localhost:8080`. It usually takes a few minutes
+to startup, so don't rush it!
