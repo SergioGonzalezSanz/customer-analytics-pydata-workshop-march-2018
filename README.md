@@ -23,7 +23,7 @@ Since we have a limited time to finish the workshop, please make sure that you:
 
 ## Getting started: get to know your data!
 
-One of the most important tasks we must accomplish before doing any data analysis is getting to know the data we are working on. We have chosen a small open-source marking dataset from a Portuguese bank for this workshop. The customers in the dataset were approached on the phone regarding a new product offered by the bank (term deposit). You can download the file [here](https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip). There is a description of the dataset in this UCI repository [page](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing).
+One of the most important tasks we must accomplish before doing any data analysis is getting to know the data we are working on. We have chosen a small open-source marking dataset from a Portuguese bank for this workshop. The customers in the dataset were approached on the phone regarding a new product offered by the bank (term deposit). There is a description of the dataset in this UCI repository [page](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing). We have added a cell in the tasks to download the data in parquet format from the server we've put together for this workshop so there is no need for you to download the data from the UCI repository.
 
 The dataset contains information about the client demographics and whether they hired the new product or not.
 
