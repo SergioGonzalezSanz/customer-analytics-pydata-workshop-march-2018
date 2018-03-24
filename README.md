@@ -159,3 +159,109 @@ folder. Then type:
 Once the daemon is running, you'll be able to access the notebook opening from
 your browser the address `http://localhost:8080`. It usually takes a few minutes
 to startup, so don't rush it!
+
+### Ubuntu
+
+#### Requirements
+You need to have Java 7 or 8, and Scala installed. You can check your Java
+version with:
+
+```bash
+$ java -version
+```
+
+In case the Java version does not match with the requirements, you can install
+version 8 with the following:
+
+```bash
+$ sudo apt-add-repository ppa:webupd8team/java
+$ sudo apt-get update
+$ sudo apt-get install oracle-java7-installer
+```
+
+Scala is another requirement for PySpark. You can download the latest version of
+Scala from the [official Scala
+archive](http://www.scala-lang.org/files/archive/). Alternatively, you can run
+the following commans:
+
+```bash
+$ wget http://www.scala-lang.org/files/archive/scala-2.12.5.deb
+$ sudo dpkg -i scala-2.12.5.deb
+$ rm scala-2.12.5.deb
+```
+
+To check that the installation was successful, just run:
+
+```bash
+$ scala -version
+```
+
+#### Python environment
+A virtual environment is recommended in order to install all the Python
+dependencies. You can use the environment manager of your choice, but make sure
+to use Python version 3.5 as the latest 3.6 will probably not work.
+
+Once the virtual environment is ready, install all the packages with `pip`:
+
+```bash
+(venv) $ pip install py4j
+(venv) $ pip install pyspark
+```
+
+When it's done, check the installation:
+
+```
+(venv) $ pyspark
+Python 3.5.2 (default, Nov 23 2017, 16:37:01)
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+2018-03-24 10:43:03 WARN  Utils:66 - Your hostname, brainBox resolves to a loopback address: 127.0.1.1; using 192.168.0.158 instead (on interface wlp58s0)
+2018-03-24 10:43:03 WARN  Utils:66 - Set SPARK_LOCAL_IP if you need to bind to another address
+2018-03-24 10:43:03 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+2018-03-24 10:43:04 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 2.3.0
+      /_/
+
+Using Python version 3.5.2 (default, Nov 23 2017 16:37:01)
+SparkSession available as 'spark'.
+>>>
+```
+
+#### Zeppelin Notebook
+You can download the Zeppelin Notebook fom the [Apache Zeppelin download
+page](https://zeppelin.apache.org/download.html) (the binary package with the
+Spark interpreter will do). From command line, just download the Zeppelin
+archive and extract it:
+
+```bash
+$ wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/zeppelin/zeppelin-0.7.3/zeppelin-0.7.3-bin-netinst.tgz
+$ tar xvf zeppelin-0.7.3-bin-netinst.tgz
+```
+
+Once the archive is available, run the Zeppelin Notebook like this (remember to
+**run Zeppelin when the virtual environment is activted!**):
+
+```bash
+(venv) $ cd zeppelin-0.7.3-bin-netinst/bin
+(venv) $ ./zeppelin-daemon.sh start
+```
+
+It will take a while for Zeppelin to actually start. You can check whether it's
+online by opening a browser at `http://localhost:8080`, or you can use the same
+script to query for the status:
+
+```bash
+(venv) $ ./zeppelin-daemon.sh status
+```
+
+When you're done with the notebook, just run:
+
+```bash
+(venv) $ ./zeppelin-daemon.sh stop
+```
