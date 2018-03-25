@@ -81,6 +81,14 @@ It will install Python in `$HOME/.pyenv/versions/3.5.5`. Now, you must set the P
 export PYSPARK_PYTHON=$HOME/.pyenv/versions/3.5.5/bin/python3.5
 ```
 
+##### Python dependencies
+
+`Task 2.json` uses the `requests` library to upload the model scores to our ranking server. Please install it using `pip`:
+
+```
+pip3 install --upgrade requests
+```
+
 #### Install Spark
 
 1. Go to your terminal
@@ -231,6 +239,14 @@ Welcome to
 Using Python version 3.5.2 (default, Nov 23 2017 16:37:01)
 SparkSession available as 'spark'.
 >>>
+```
+
+##### Python dependencies
+
+`Task 2.json` uses the `requests` library to upload the model scores to our ranking server. Please install it using `pip`:
+
+```
+pip3 install --upgrade requests
 ```
 
 #### Zeppelin Notebook
